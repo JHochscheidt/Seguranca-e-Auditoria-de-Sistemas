@@ -1,31 +1,47 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 
 public class cifraDeCesar{
 	
+		
     public static void main(String[] args){
 
-    	
-        String url = "textoPuro.txt" ; // texto a ser cifrado/decifrado
-        File arquivoTexto =  new File(url);
-        File arquivoTextoCifrado = new File("cifrado.txt");
+    	final int chave = 5;
+        
+        File arquivoTextoOriginal =  new File("textoPuro.txt"); // texto a ser cifrado/decifrado
+        File arquivoTextoCifrado = new File("cifrado.txt"); // texto apos cifrado
+        arquivoTextoCifrado.delete();
+        arquivoTextoCifrado = new File("cifrado.txt"); 
+        File arquivoTextoDecifrado = new File("decifrado.txt"); // texto apos desifrado, deve estar igual ao original
         
         try{
         	arquivoTextoCifrado.createNewFile();
-        	final int chave = 5;
-        	FileReader ler = new FileReader(arquivoTexto); // arquivo de leitura
+        	FileReader ler = new FileReader(arquivoTextoOriginal); // arquivo de leitura
         	BufferedReader lerBuffer = new BufferedReader(ler); // buffer de leitura
         	String linha = lerBuffer.readLine();
+        	FileWriter escrever = new FileWriter(arquivoTextoCifrado, true);
+        	BufferedWriter escreverBuffer = new BufferedWriter(escrever);
+        	int valor ;
         	while(linha != null){
-        		for(int i = 0; i < linha.length(); i++){
-        			System.out.println(linha.charAt(i));
+        		char[] aux = new char[linha.length()];
+        		for(int cont = 0; cont < linha.length(); cont++){
+        			aux[cont] = linha.charAt(cont);
+        		}        		 
+        		for(int i = 0; i < aux.length; i++){
+        			valor = ((int)aux[i] + chave) % 256 ;
+        			aux[i] = (char) valor;
+        			escrever.write(aux[i]);
         		}
         		linha = lerBuffer.readLine();
         	}
-        }catch(IOException e){
+        	escreverBuffer.close();
+        	escrever.close();
+    	}catch(IOException e){
         	System.out.println("nao foi possivel criar cifrado.txt");
         }
         
