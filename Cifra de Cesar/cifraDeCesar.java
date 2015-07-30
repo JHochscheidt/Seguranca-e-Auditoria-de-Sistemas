@@ -18,7 +18,13 @@ public class cifraDeCesar{
         	final int chave = 5;
         	FileReader ler = new FileReader(arquivoTexto); // arquivo de leitura
         	BufferedReader lerBuffer = new BufferedReader(ler); // buffer de leitura
-        	
+        	String linha = lerBuffer.readLine();
+        	while(linha != null){
+        		for(int i = 0; i < linha.length(); i++){
+        			System.out.println(linha.charAt(i));
+        		}
+        		linha = lerBuffer.readLine();
+        	}
         }catch(IOException e){
         	System.out.println("nao foi possivel criar cifrado.txt");
         }
