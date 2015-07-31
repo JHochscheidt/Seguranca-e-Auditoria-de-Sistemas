@@ -25,7 +25,7 @@ public class cifraDeCesar{
         	FileReader ler = new FileReader(arquivoTextoOriginal); // arquivo de leitura
         	BufferedReader lerBuffer = new BufferedReader(ler); // buffer de leitura
         	String linha = lerBuffer.readLine();
-        	FileWriter escrever = new FileWriter(arquivoTextoCifrado, true);
+        	FileWriter escrever = new FileWriter(arquivoTextoCifrado, false);
         	BufferedWriter escreverBuffer = new BufferedWriter(escrever);
         	int valor ;
         	while(linha != null){
@@ -45,11 +45,13 @@ public class cifraDeCesar{
         	escreverBuffer.close();
         	escrever.close();
         	
-        	// parte de decifra o texto
+        // parte de decifra o texto
         	arquivoTextoDecifrado.createNewFile();
         	ler = new FileReader(arquivoTextoCifrado);
-        	escrever = new FileWriter(arquivoTextoDecifrado, true);
-        	linha = lerBuffer();
+        	lerBuffer = new BufferedReader(ler);
+        	escrever = new FileWriter(arquivoTextoDecifrado, false);
+        	escreverBuffer = new BufferedWriter(escrever);
+        	linha = lerBuffer.readLine();
         	while(linha != null){
         		char[] aux = new char[linha.length()];
         		// passa a string LINHA para dentro de um vetor de char para poder substituir os caracteres
@@ -58,7 +60,7 @@ public class cifraDeCesar{
         		}        		 
         		// percorre o vetor de char trocando (cifrando) o texto
         		for(int i = 0; i < aux.length; i++){
-        			valor = ((int)aux[i] + chave) % 256 ;
+        			valor = ((int)aux[i] - chave) % 256 ;
         			aux[i] = (char) valor;
         			escrever.write(aux[i]);
         		}
