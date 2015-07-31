@@ -33,7 +33,7 @@ public class cifraDeTransposicao{
 							if(linha == null){
 								for(; i < row; i++){
 									for(; j < col; j++){
-										matrizTransposicao[i][j] = 'x';
+										matrizTransposicao[j][i] = 'x';
 									}
 								}
 								break;
@@ -44,7 +44,7 @@ public class cifraDeTransposicao{
 							
 						}
 						if(posicaoLinha < tamLinha){
-							matrizTransposicao[i][j] = linha.charAt(posicaoLinha);
+							matrizTransposicao[j][i] = linha.charAt(posicaoLinha);
 							posicaoLinha++;
 						}
 					}
@@ -57,7 +57,7 @@ public class cifraDeTransposicao{
 		
 		for(int i = 0; i < row; i++){
 			for(int j = 0; j < col; j++){
-				System.out.print(matrizTransposicao[i][j]);
+				System.out.print(" " + matrizTransposicao[i][j]);
 			}
 			System.out.println();
 		}		
