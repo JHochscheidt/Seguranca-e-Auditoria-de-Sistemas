@@ -12,6 +12,7 @@ public class cifraDeTransposicao{
 		//System.out.println(tamanhoArq);
 		int tamanhoMatrizQuadrada;
 		tamanhoMatrizQuadrada = 1 + (int) Math.sqrt(tamanhoArq);
+		System.out.println("Tamanho matriz" + tamanhoMatrizQuadrada);
 		//System.out.println(tamanhoMatrizQuadrada);
 		char[][] matrizTransposicao = new char[tamanhoMatrizQuadrada][tamanhoMatrizQuadrada];
 		int row = tamanhoMatrizQuadrada;
@@ -23,7 +24,7 @@ public class cifraDeTransposicao{
 			String linha = lerBuffer.readLine();
 			int tamLinha;
 			int posicaoLinha = 0;
-	
+		// para cifrar o arquivo
 			while(linha != null){
 				tamLinha = linha.length();
 				for(int i = 0; i < row;  i++){
@@ -31,13 +32,13 @@ public class cifraDeTransposicao{
 						if(posicaoLinha == tamLinha){
 							linha = lerBuffer.readLine();
 							if(linha == null){
-								/*for(; i < row; i++){
+								for(; i < row; i++){
 									for(; j < col; j++){
 										matrizTransposicao[j][i] = 'x';
 									}
-								}*/
-								i = row;
-								j = col;
+								}
+								//i = row;
+								//j = col;
 								break;
 							}
 							tamLinha = linha.length();
@@ -55,20 +56,37 @@ public class cifraDeTransposicao{
 			BufferedWriter escreverBuffer = new BufferedWriter(escrever);
 			for(int i = 0; i < tamanhoMatrizQuadrada;i++){
 				for(int j = 0; j < tamanhoMatrizQuadrada; j++){
-					escrever.write(matrizTransposicao[i][j]);
+					if(0 == (int) matrizTransposicao[i][j])
+						matrizTransposicao[i][j] = (char) 32;
+					escrever.write(matrizTransposicao[i][j]);				
 				}
 			}
 			escreverBuffer.close();
 			escrever.close();
+		// fim cifra de arquivo
+		
+		// para decifrar arquivo
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		}catch(IOException e){
 			System.out.println("erro de arquivo");
 		}
 		// imprime a matriz de char, para fins de teste, para verificar se esta correta a escrita na matriz
+		
 		for(int i = 0; i < row; i++){
 			for(int j = 0; j < col; j++){
 				System.out.print(" " + matrizTransposicao[i][j]);
 			}
 			System.out.println();
-		}		
+		} 
+		
+				
 	}	
 }
