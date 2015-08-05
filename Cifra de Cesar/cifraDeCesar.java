@@ -11,7 +11,7 @@ public class cifraDeCesar{
 		
     public static void main(String[] args){
 
-    	final int chave = 5;
+    	final int chave = 10;
         
         File arquivoTextoOriginal =  new File("textoPuro.txt"); // texto a ser cifrado/decifrado
         File arquivoTextoCifrado = new File("cifrado.txt"); // texto apos cifrado
