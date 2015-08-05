@@ -8,7 +8,11 @@ public class cifraDeVigenere{
 		File arquivoOriginal = new File("textoPuro.txt");
 		File textoCifrado = new File("textoCifrado.txt");
 		File textoDecifrado = new File("textoDecifrado.txt");
-		
+		/*
+		 * for(int i= 0 ; i < chave.length; i++){
+			System.out.println((byte) chave[i]);
+		}
+		*/
 		
 		try{			
 			FileReader ler = new FileReader(arquivoOriginal);
@@ -26,6 +30,7 @@ public class cifraDeVigenere{
 			char[] key = new char[aux.length()];
 			for(int i = 0; i < key.length; i++){
 				key[i] = chave[i % chave.length];
+				//System.out.print(key[i]);
 			}
 			int b;
 			for(int i = 0; i < key.length; i++){
@@ -54,7 +59,7 @@ public class cifraDeVigenere{
 			
 			for(int i = 0; i < key.length; i++){
 				b = ((256 + (int)aux.charAt(i) - (int)key[i]) % 256) ;
-				System.out.print(b + " ");
+				//System.out.print(b + " ");
 				escrever.write(b);
 			}
 			escreverBuffer.close();
