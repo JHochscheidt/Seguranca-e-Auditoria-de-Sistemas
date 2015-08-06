@@ -27,7 +27,6 @@ public class cifraDeSubstituicao{
 			System.out.println("erro na leitura,escrita ou criacao de algum arquivo");
 		}
 		
-		
 		/*
 		 try{
 			FileReader lerTabela = new FileReader(tabela);	
@@ -44,7 +43,60 @@ public class cifraDeSubstituicao{
 		}
 		*/		
 		
-				
-	}
+		
+		// cifrando arquivo fonte original
+		System.out.println("Cifrando arquivo...");	
+		File arquivoFonte = new File("textoPuro.txt");
+		
+		try{
+			FileReader lerFonte = new FileReader(arquivoFonte);
+			BufferedReader bufferFonte = new BufferedReader(lerFonte);
+			
+			FileReader lerTabela = new FileReader(tabela);
+			BufferedReader bufferTabela = new BufferedReader(lerTabela);
+			
+			
+			File cifrado = new File("cifrado.txt");
+			cifrado.createNewFile();
+			FileWriter escreverTextoCifrado = new FileWriter(cifrado);
+			BufferedWriter bufferTextoCifrado = new BufferedWriter(escreverTextoCifrado);
+			
+			String linha = bufferFonte.readLine();
+			String linhaTabela;
+			int valorC;
+			while(linha != null){
+				//	System.out.print("Linha");
+				for(int i = 0; i < linha.length(); i++){
+					//System.out.print("Caracter");
+					valorC = (int)linha.charAt(i);
+					System.out.print(valorC);
+					linhaTabela = bufferTabela.readLine();
+					
+					while(linhaTabela != null){
+						//System.out.print("LinhaTabela");
+						String[] aux = new String[2];
+						aux = linhaTabela.split(" ");
+						int valorAux = Integer.parseInt(aux[0]);
+						if(valorC == valorAux){
+							System.out.println("aqui");
+							int a = Integer.parseInt(aux[1]);
+							char c = (char) a;
+							escreverTextoCifrado.write(c);
+							break;
+						}else{
+							linhaTabela = bufferTabela.readLine();
+						}
+						// for(int pos = 0; pos < aux.length; pos++){System.out.print(aux[pos]);} // teste de verificacao dos valores de aux
+					}
+				}
+				linha = bufferFonte.readLine();		
+			}
+			bufferTextoCifrado.close();
+			escreverTextoCifrado.close();					
 
+			
+		}catch(IOException e){
+			System.out.println("erro no arquivo");
+		}				
+	}
 }
