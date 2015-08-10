@@ -1,0 +1,1 @@
+INDEX VERSION 1.126+/home/jackson/Dropbox/UFFS/2015.2/Segurança e Auditoria de Sistemas/Seguranca-e-Auditoria-de-Sistemas/Cifra de Cesar/.metadata/.plugins/org.eclipse.jdt.core
