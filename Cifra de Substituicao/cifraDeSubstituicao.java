@@ -107,9 +107,62 @@ public class cifraDeSubstituicao{
 			
 			
 			// decifrando arquivo cifrado
+			System.out.println("Decifrando arquivo...");
+			//File arquivoFonte = new File("textoPuro.txt");
 			
+			FileReader lerCifrado = new FileReader(cifrado);
+			BufferedReader bufferCifrado = new BufferedReader(lerCifrado);
+						
+			//FileReader lerTabela;
+			//BufferedReader bufferTabela;
+			//String linhaTabela;
 			
-			
+			File decifrado = new File("decifrado.txt");
+			decifrado.createNewFile();
+			FileWriter escreverDecifrado = new FileWriter(decifrado);
+			BufferedWriter bufferDecifrado = new BufferedWriter(escreverDecifrado);
+
+			String linhaCifrado = bufferCifrado.readLine();
+					
+			//int valorIntC;
+			// enquanto tiver linhas no arquivo cirado
+			while(linhaCifrado != null){
+				//percorre a linha atual
+				for(int i = 0; i < linhaCifrado.length(); i++){
+					valorIntC = (int)linhaCifrado.charAt(i);
+					//System.out.print(valorC -> linhaCifrado.charAt(i));
+					
+					lerTabela = new FileReader(tabela);
+					bufferTabela = new BufferedReader(lerTabela);
+					linhaTabela = bufferTabela.readLine();
+					//System.out.print(linhaTabela + "-");
+					
+					String[] aux = new String[2];
+					int  intC;
+					char charC;
+					while(linhaTabela != null){
+						aux = linhaTabela.split(" "); // separa a linha por espacos
+						//System.out.println(aux[0] + " " + aux[1]);	
+						intC = Integer.parseInt(aux[1]); // pega a segunda "string" da linha AUX
+						//System.out.println(intC + " " + aux[0]);
+						//System.out.println(valorC + " " + aux + " " + valorCchar );
+						if(valorIntC == intC){
+							int a = Integer.parseInt(aux[0]);
+							char c = (char) a;
+							//System.out.println(c + " " + a);
+							escreverDecifrado.write(c);
+							break;
+						}else{
+							linhaTabela = bufferTabela.readLine();
+						}
+						// for(int pos = 0; pos < aux.length; pos++){System.out.print(aux[pos]);} // teste de verificacao dos valores de aux
+					}
+				}
+				linhaCifrado = bufferCifrado.readLine();
+			}
+			bufferDecifrado.close();
+			escreverDecifrado.close();
+						
 		}catch(IOException e){
 			System.out.println("erro no arquivo");
 		}
